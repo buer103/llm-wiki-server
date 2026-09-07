@@ -1,0 +1,29 @@
+[project]
+name = "llm-wiki-server"
+version = "0.1.0"
+description = "Internal knowledge storage, construction, retrieval and graph service"
+requires-python = ">=3.11,<3.12"
+dependencies = [
+  "fastapi==0.135.1",
+  "uvicorn[standard]==0.44.0",
+  "pydantic-settings>=2.7,<3",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8,<9",
+  "pytest-asyncio>=0.25,<1",
+  "httpx>=0.28,<1",
+  "ruff>=0.11,<1",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP"]
