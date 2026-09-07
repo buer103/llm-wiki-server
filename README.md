@@ -4,7 +4,13 @@
 > 版本：v4  
 > 日期：2026-09-07
 
-本仓库用于将原 `llm-wiki` 重构为公司内部可部署的 Python 知识存储与检索服务。当前 PR 首先建立设计基线，随后进入 P0 行为基线与 characterization 阶段。
+本仓库用于将原 `llm-wiki` 重构为公司内部可部署的 Python 知识存储与检索服务。
+
+## 当前状态
+
+- **P0：设计与代码基线文档已合并到 `master`**
+- **P1：Python Server Foundation 进行中**
+- P1 不实现 Ingest/Search/Graph/Research 业务，只建立可测试的运行时与模块边界。
 
 ## 文档地图
 
@@ -17,6 +23,7 @@
 | 04 | [数据模型与存储设计](./docs/04-data-design.md) | Data Contract：MySQL/ES/OBS/Repository |
 | 05 | [实施与部署计划](./docs/05-deployment-plan.md) | When / Where / Gate：怎么实施、测试、部署、上线 |
 | 06 | [测试与验收方案](./docs/06-test-acceptance.md) | Proof：如何证明功能、质量、可靠性达标 |
+| 07 | [Python 开发指南](./docs/07-development-guide.md) | P1 如何启动、分层与验证 |
 
 ## 依赖关系
 
@@ -37,6 +44,28 @@
         |
         v
 06 Test & Acceptance
+        |
+        v
+07 Python Development Guide
+```
+
+## P1 代码结构
+
+```text
+app/
+├── api/             # REST/MCP adapters
+├── core/            # configuration and cross-cutting concerns
+├── domain/          # business concepts, infrastructure-independent
+├── services/        # application use cases
+├── repositories/    # persistence abstractions
+├── infrastructure/  # MySQL/ES/Redis/Kafka/OBS/LiteLLM/VIAM adapters
+└── workers/         # asynchronous task consumers
+
+tests/
+├── unit/
+├── contract/
+├── integration/
+└── golden/
 ```
 
 ## 设计原则
